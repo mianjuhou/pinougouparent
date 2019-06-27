@@ -14,7 +14,10 @@ public class SpecificationOptionService {
     private SpecificationOptionDao dao;
 
     public List<SpecificationOption> findBySpecId(long specId){
-        return dao.findBySpecId(specId);
+        return dao.findAllBySpecIdOrderByOrdersAsc(specId);
     }
 
+    public void deleteBySpecId(long specId){
+        dao.deleteAllBySpecId(specId);
+    }
 }

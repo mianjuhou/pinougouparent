@@ -2,10 +2,7 @@ package com.fs.shopweb.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -13,8 +10,11 @@ import java.io.Serializable;
 @Data
 public class SpecificationOption implements Serializable {
     @Id
-    private long id;
-    private String option_name;
-    private long spec_id;
-    private int orders;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "option_name")
+    private String optionName;
+    @Column(name = "spec_id")
+    private Long specId;
+    private Integer orders;
 }

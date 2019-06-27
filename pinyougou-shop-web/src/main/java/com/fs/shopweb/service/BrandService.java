@@ -68,8 +68,8 @@ public class BrandService {
                     Predicate predicate = criteriaBuilder.like(root.get("name").as(String.class), "%" + bean.getName() + "%");
                     list.add(predicate);
                 }
-                if (!StringUtils.isEmpty(bean.getFirst_char())) {
-                    Predicate predicate = criteriaBuilder.like(root.get("first_char").as(String.class), "%" + bean.getFirst_char() + "%");
+                if (!StringUtils.isEmpty(bean.getFirstChar())) {
+                    Predicate predicate = criteriaBuilder.like(root.get("first_char").as(String.class), "%" + bean.getFirstChar() + "%");
                     list.add(predicate);
                 }
                 Predicate[] predicates = new Predicate[list.size()];

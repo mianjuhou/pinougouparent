@@ -2,16 +2,20 @@ package com.fs.shopweb.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_specification")
 @Data
 public class Specification implements Serializable {
     @Id
-    private long id;
-    private String spec_name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "spec_name")
+    private String specName;
+
+    @Transient
+    private List<SpecificationOption> options;
 }

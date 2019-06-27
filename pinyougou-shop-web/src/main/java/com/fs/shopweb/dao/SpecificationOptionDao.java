@@ -12,4 +12,7 @@ public interface SpecificationOptionDao extends JpaRepository<SpecificationOptio
     @Query(value = "select * from tb_specification_option where spec_id = ? order by orders asc ",nativeQuery = true)
     List<SpecificationOption> findBySpecId(long specId);
 
+    List<SpecificationOption> findAllBySpecIdOrderByOrdersAsc(long specId);
+
+    int deleteAllBySpecId(long specId);
 }

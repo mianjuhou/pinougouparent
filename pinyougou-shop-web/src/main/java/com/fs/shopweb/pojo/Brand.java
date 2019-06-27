@@ -2,6 +2,7 @@ package com.fs.shopweb.pojo;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,5 +15,6 @@ public class Brand implements Serializable {
     @Id
     private Long id;
     private String name;
-    private String first_char;
+    @Column(name = "first_char")
+    private String firstChar;
 }

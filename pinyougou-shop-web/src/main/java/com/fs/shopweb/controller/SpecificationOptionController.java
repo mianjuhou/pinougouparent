@@ -23,4 +23,15 @@ public class SpecificationOptionController {
         return new Result<>(true, StatusCode.OK, "获取规格选项列表成功", options);
     }
 
+    //其他
+    /**
+     * 根据规格Id删除关联的所有子选项
+     */
+    @DeleteMapping("/deleteAll/{specId}")
+    public Result deleteBySpecId(@PathVariable long specId) {
+        service.deleteBySpecId(specId);
+        return new Result<>(true, StatusCode.OK, "删除规格选项列表成功");
+    }
+
+
 }
