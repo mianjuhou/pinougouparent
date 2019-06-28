@@ -6,13 +6,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_brand")
+@Table(name = "tb_item_cat")
 @Data
-public class Brand implements Serializable {
+public class ItemCat implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "parent_id")
+    private Long parentId;
     private String name;
-    @Column(name = "first_char")
-    private String firstChar;
+    @Column(name = "type_id")
+    private Long typeId;
 }

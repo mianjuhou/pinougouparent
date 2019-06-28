@@ -4,7 +4,6 @@ import com.fs.common.entity.PageResult;
 import com.fs.common.entity.Result;
 import com.fs.common.entity.StatusCode;
 import com.fs.shopweb.pojo.Specification;
-import com.fs.shopweb.pojo.Specification;
 import com.fs.shopweb.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -77,7 +76,7 @@ public class SpecificationController {
 
     @DeleteMapping("/deleteAll")
     public Result deleteAll(@RequestBody List<Long> ids) {
-        service.deleteAll(ids);
+        service.deleteByIds(ids);
         return new Result(true, StatusCode.OK, "级联删除成功");
     }
 

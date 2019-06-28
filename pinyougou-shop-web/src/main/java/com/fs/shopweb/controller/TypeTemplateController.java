@@ -4,7 +4,6 @@ import com.fs.common.entity.PageResult;
 import com.fs.common.entity.Result;
 import com.fs.common.entity.StatusCode;
 import com.fs.shopweb.pojo.TypeTemplate;
-import com.fs.shopweb.pojo.TypeTemplate;
 import com.fs.shopweb.service.TypeTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +67,7 @@ public class TypeTemplateController {
     //其他
     @DeleteMapping("/deleteAll")
     public Result deleteAll(@RequestBody List<Long> ids) {
-        service.deleteAll(ids);
+        service.deleteByIds(ids);
         return new Result(true, StatusCode.OK, "删除多条模板成功");
     }
 
