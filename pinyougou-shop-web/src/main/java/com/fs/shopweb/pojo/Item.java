@@ -22,7 +22,8 @@ public class Item implements Serializable {
     private Integer num;
     private String barcode;
     private String image;
-    private String categoryId;
+    @Column(name = "category_id")
+    private Long categoryId;
     private String status;
     @Column(name = "create_time")
     private Date createTime;

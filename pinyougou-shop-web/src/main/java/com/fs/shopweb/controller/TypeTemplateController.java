@@ -3,6 +3,7 @@ package com.fs.shopweb.controller;
 import com.fs.common.entity.PageResult;
 import com.fs.common.entity.Result;
 import com.fs.common.entity.StatusCode;
+import com.fs.shopweb.bean.IdTextOption;
 import com.fs.shopweb.pojo.TypeTemplate;
 import com.fs.shopweb.service.TypeTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,11 +65,22 @@ public class TypeTemplateController {
         return new Result(true, StatusCode.OK, "获取品牌列表成功", pageResult);
     }
 
-    //其他
+    /**
+     * 其他
+     */
+    /*删除多条模板
+     */
     @DeleteMapping("/deleteAll")
     public Result deleteAll(@RequestBody List<Long> ids) {
         service.deleteByIds(ids);
         return new Result(true, StatusCode.OK, "删除多条模板成功");
     }
 
+    /*查询规格的全部信息
+     */
+    @GetMapping("/findSpecInfoById/{id}")
+    public Result<List<IdTextOption>> findSpecInfoById(@PathVariable("id") long id) {
+        List<IdTextOption> beans = service.findSpecInfoById(id);
+        return new Result<>(true, StatusCode.OK, "获取规格完整信息成功", beans);
+    }
 }

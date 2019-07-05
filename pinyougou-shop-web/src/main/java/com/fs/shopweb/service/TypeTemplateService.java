@@ -1,9 +1,11 @@
 package com.fs.shopweb.service;
 
+import com.alibaba.fastjson.JSON;
 import com.fs.common.entity.PageResult;
+import com.fs.shopweb.bean.IdTextOption;
+import com.fs.shopweb.dao.SpecificationOptionDao;
 import com.fs.shopweb.dao.TypeTemplateDao;
-import com.fs.shopweb.pojo.Brand;
-import com.fs.shopweb.pojo.Seller;
+import com.fs.shopweb.pojo.SpecificationOption;
 import com.fs.shopweb.pojo.TypeTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,9 @@ public class TypeTemplateService {
 
     @Autowired
     private TypeTemplateDao dao;
+
+    @Autowired
+    private SpecificationOptionDao optionDao;
 
     /**
      * 增
@@ -85,8 +90,21 @@ public class TypeTemplateService {
     /**
      * 其他
      */
-    //ID多删除
+    /*ID多删除
+     */
     public void deleteByIds(List<Long> ids) {
         dao.deleteByIds(ids);
+    }
+
+    /*查询规格的全部信息
+     */
+    public List<IdTextOption> findSpecInfoById(long id) {
+        TypeTemplate typeTemplate = dao.findById(id).get();
+        List<IdTextOption> beans = JSON.parseArray(typeTemplate.getSpecIds(), IdTextOption.class);
+        beans.forEach(bean -> {
+            List<SpecificationOption> options = optionDao.findAllBySpecIdOrderByOrdersAsc(bean.getId());
+            bean.setOptions(options);
+        });
+        return beans;
     }
 }
