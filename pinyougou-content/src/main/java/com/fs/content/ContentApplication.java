@@ -1,4 +1,4 @@
-package com.fs.shopweb;
+package com.fs.content;
 
 import com.github.tobato.fastdfs.FdfsClientConfig;
 import org.springframework.boot.SpringApplication;
@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @EnableEurekaClient
 @Import(FdfsClientConfig.class)
-public class ShopWebApplication {
+public class ContentApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ShopWebApplication.class, args);
+        SpringApplication.run(ContentApplication.class, args);
     }
 
 }

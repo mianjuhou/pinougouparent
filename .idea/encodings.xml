@@ -2,7 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/demo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-content" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-shop-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou_common" charset="UTF-8" />
   </component>

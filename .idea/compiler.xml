@@ -7,7 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="pinyougou_common" />
+        <module name="eureka" />
         <module name="pinyougoushopweb" />
+        <module name="pinyougoucontent" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -17,7 +19,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo" options="-parameters" />
+      <module name="eureka" options="-parameters" />
       <module name="pinyougou_common" options="-parameters" />
+      <module name="pinyougoucontent" options="-parameters" />
       <module name="pinyougoushopweb" options="-parameters" />
     </option>
   </component>

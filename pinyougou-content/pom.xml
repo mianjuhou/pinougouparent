@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fs</groupId>
-    <artifactId>pinyougou-shop-web</artifactId>
+    <groupId>com.fs.content</groupId>
+    <artifactId>pinyougou-content</artifactId>
 
     <dependencies>
         <dependency>

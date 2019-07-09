@@ -10,6 +10,7 @@
     <modules>
         <module>pinyougou_common</module>
         <module>pinyougou-shop-web</module>
+        <module>pinyougou-content</module>
     </modules>
 
     <!-- maven相关 -->
