@@ -6,10 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="pinyougou_common" />
-        <module name="eureka" />
-        <module name="pinyougoushopweb" />
+        <module name="zuul" />
         <module name="pinyougoucontent" />
+        <module name="eureka" />
+        <module name="securitydemo" />
+        <module name="pinyougou_common" />
+        <module name="zuul2" />
+        <module name="pinyougoushopweb" />
+        <module name="zuul3" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -23,6 +27,10 @@
       <module name="pinyougou_common" options="-parameters" />
       <module name="pinyougoucontent" options="-parameters" />
       <module name="pinyougoushopweb" options="-parameters" />
+      <module name="securitydemo" options="-parameters" />
+      <module name="zuul" options="-parameters" />
+      <module name="zuul2" options="-parameters" />
+      <module name="zuul3" options="-parameters" />
     </option>
   </component>
 </project>

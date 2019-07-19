@@ -110,4 +110,12 @@ public class ContentController {
         return new Result<>(true, StatusCode.OK, "批量修改" + MODULE_NAME + "状态成功");
     }
 
+    /*根据分类ID查询
+     */
+    @GetMapping("/catId/{categoryId}")
+    public Result findByCategoryId(@PathVariable("categoryId") Long categoryId) {
+        List<Content> beans = contentService.findByCategoryId(categoryId);
+        return new Result(true, StatusCode.OK, "获取" + MODULE_NAME + "列表成功", beans);
+    }
+
 }

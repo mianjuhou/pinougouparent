@@ -6,10 +6,13 @@ import com.fs.content.pojo.Content;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -22,25 +25,37 @@ public class ContentService {
     @Autowired
     private ContentDao contentDao;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     /**
      * 增
      */
     public void save(Content bean) {
         contentDao.save(bean);
+        redisTemplate.boundHashOps("content").delete(bean.getCategoryId());
     }
 
     /**
      * 删
      */
     public void deleteById(Long id) {
+        Long categoryId = findById(id).getCategoryId();
         contentDao.deleteById(id);
+        redisTemplate.boundHashOps("content").delete(categoryId);
     }
 
     /**
      * 改
      */
     public void update(Content bean) {
+        Long oldCategoryId = findById(bean.getId()).getCategoryId();
+        redisTemplate.boundHashOps("content").delete(oldCategoryId);
+
         contentDao.save(bean);
+        if (oldCategoryId.longValue() != bean.getCategoryId().longValue()) {
+            redisTemplate.boundHashOps("content").delete(bean.getCategoryId());
+        }
     }
 
     /**
@@ -61,7 +76,10 @@ public class ContentService {
     /*条件查
      */
     public List<Content> findSearch(Content bean) {
-        return contentDao.findAll(getSpecification(bean));
+        List<Sort.Order> orders = new ArrayList<>();
+        orders.add(new Sort.Order(Sort.Direction.ASC, "categoryId"));
+        orders.add(new Sort.Order(Sort.Direction.ASC, "sortOrder"));
+        return contentDao.findAll(getSpecification(bean), Sort.by(orders));
     }
 
     /*分页查
@@ -78,7 +96,7 @@ public class ContentService {
             List<Predicate> list = new ArrayList<>();
             //categoryId精确匹配
             if (!StringUtils.isEmpty(bean.getCategoryId())) {
-                Predicate predicate = criteriaBuilder.equal(root.get("category_id").as(String.class), bean.getCategoryId());
+                Predicate predicate = criteriaBuilder.equal(root.get("categoryId").as(String.class), bean.getCategoryId());
                 list.add(predicate);
             }
 
@@ -118,6 +136,23 @@ public class ContentService {
      */
     public void updateStatusByIds(List<Long> ids, String status) {
         contentDao.updateStatusByIds(ids, status);
+    }
+
+    /*根据分类ID查询
+     */
+    public List<Content> findByCategoryId(Long categoryId) {
+        List<Content> list = (List<Content>) redisTemplate.boundHashOps("content").get(categoryId);
+        if (list == null || list.isEmpty()) {
+            System.out.println("从数据库中获取数据");
+            Content content = new Content();
+            content.setCategoryId(categoryId);
+            content.setStatus("1");
+            list = findSearch(content);
+            redisTemplate.boundHashOps("content").put(categoryId, list);
+        } else {
+            System.out.println("从缓存中获取数据");
+        }
+        return list;
     }
 
 }
